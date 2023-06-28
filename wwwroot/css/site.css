@@ -1,0 +1,43 @@
+/* Стили для таблицы */
+.table {
+    width: 70%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Стили для элемента <a> в строке таблицы */
+.table tr a {
+    color: blue;
+    text-decoration: underline;
+}
+/* Стили для кнопки добавления */
+.btn-add {
+    background-color: green;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Стили для кнопки удаления */
+.btn-delete {
+    background-color: red;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Стили для полей ввода */
+.input-field {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

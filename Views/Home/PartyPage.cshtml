@@ -1,0 +1,81 @@
+﻿@using PharmacyWebApp.Models.Tables;
+@using PharmacyWebApp.Models.Tables.ProductClasses;
+@model Warehouse;
+<head>
+    <link href="/css/site.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="div-parties">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Товар</th>
+                    <th>Количестсво</th>
+                    <th>Склад</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="party in parties">
+                    <td>{{party.id}}</td>
+                    <td>{{party.product.name}}</td>
+                    <td>{{party.countProducts}}</td>
+                    <td>{{party.warehouse.name}}</td>
+                    <td>
+                        <a v-onclick="removeParty(party.id)">Удалить</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            var partiesVue = new Vue({
+                el: '#div-parties',
+                data:
+                {
+                    newparty:
+                    {
+                        Product:{},
+                        Warehouse: @Model,
+                        CountProducts:0
+                    },
+                    parties:[],
+                    url:
+                    {
+                        parties:''
+                    }
+                },
+                mounted()
+                {
+                    this.getParties();
+                },
+                methods:
+                {
+                    getParties: function()
+                    {
+                        axios.get(this.url.parties).then((response)=>{
+                            this.parties = response.data;
+                        });
+                    },
+                    removeParty: function(id)
+                    {
+                        axios.post('/Home/RemoveParty/?id', id ).
+                        then((response)=> {
+                            this.parties = this.parties.filter(party=> party.id != id);
+                        });
+                    },
+                    addParty: function()
+                    {
+                        axios.post('/Home/AddParty', this.newparty)
+                        .then((response)=> {
+                            this.parties.push(response.data);
+                        });
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>

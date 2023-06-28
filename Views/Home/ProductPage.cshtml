@@ -1,0 +1,81 @@
+﻿
+<head>
+    <link href="/css/site.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="div-products">
+        <div>
+            <form onsubmit="return false;" v-on:submit="addProduct">
+                <input class="input-field" type="text" v-model="newproduct.Name" required />
+                <input type="submit" value="Добавить" class="btn-add" />
+            </form>
+
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Название</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbody-products">
+                    <tr v-for="product in products">
+                        <td>{{product.id}}</td>
+                        <td>{{product.name}}</td>
+                        <td>
+                            <a v-on:click="removeProduct(product.id)" href="#">Удалить</a>
+                        </td>
+                    </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var productsVue = new Vue({
+            el: '#div-products',
+            data:{
+                newproduct:
+                {
+                    Name: '',
+                },
+                products:[],
+                url:{
+                    products: '/Home/GetProducts/'
+                }
+            },
+            mounted()
+            {
+                this.getProducts();
+            },
+            methods:{
+                getProducts: function()
+                {
+                    axios.get(this.url.products).then((response) => {
+                        //console.log(response.data);
+                        this.products = response.data;
+                    });
+                },
+                removeProduct: function(id)
+                {
+                    axios.post('/Home/RemoveProduct/?id=' + id)
+                    .then((response)=>{
+                            
+                        this.products = this.products.filter(c=> c.id != id);
+                    });
+                },
+                addProduct: function()
+                {
+                    console.log(this.newproduct);
+                    axios.post('/Home/AddProduct', this.newproduct).
+                    then((response) => 
+                    {
+                        this.products.push(response.data);
+                    });
+                }
+            }
+        });
+    </script>
+</body>

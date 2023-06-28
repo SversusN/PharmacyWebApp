@@ -1,0 +1,28 @@
+﻿@using PharmacyWebApp.Models.Tables;
+@using PharmacyWebApp.Models.Tables.ProductClasses;
+@model Pharmacy;
+
+<head>
+    <link href="/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach (var product in Model.ProductsInPharmacies)
+                    {
+                        <tr>
+                            <td>@product.Product.Name</td>
+                            <td>@product.CountProducts</td>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
+</body>

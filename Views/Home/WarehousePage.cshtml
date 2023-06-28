@@ -1,0 +1,33 @@
+﻿@using PharmacyWebApp.Models.Tables;
+@using PharmacyWebApp.Models.Tables.ProductClasses;
+@model Pharmacy;
+<head>
+    <link href="/css/site.css" rel="stylesheet"/>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Название</th>
+                    <th>Аптека</th>
+                    <th>Партии</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Warehouses)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Pharmacy.Name</td>
+                        <td>
+                            <a href ="/Home/PartyForWarehouse/?id=@item.Id">Партии</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>

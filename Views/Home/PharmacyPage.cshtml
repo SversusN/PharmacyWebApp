@@ -1,0 +1,45 @@
+﻿@using PharmacyWebApp.Models.Tables;
+@model IEnumerable<Pharmacy>
+<head>
+    <link href="/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> Номер </th>
+                    <th> Название</th>
+                    <th>Адрес</th>
+                    <th>Телефон</th>
+                    <th>Склады</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pharmacy in Model)
+                {
+                    <tr>
+                        <td> @pharmacy.Id </td>
+                        <td> @pharmacy.Name</td>
+                        <td>@pharmacy.City @pharmacy.Street</td>
+                        <td>@pharmacy.Phone</td>
+                        <td>
+                            @foreach (var warehouse in pharmacy.Warehouses)
+                            {
+                                <a href="/Home/WarehouseForPharmacy/?id=@pharmacy.Id">@warehouse.Name</a>
+                                <p></p>
+                            }
+                        </td>
+                        <td>
+                            <a href="/Home/ProductsFromPharmacy/?id=@pharmacy.Id">Товары</a>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</body>
