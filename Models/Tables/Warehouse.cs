@@ -21,9 +21,12 @@ namespace PharmacyWebApp.Models.Tables
         {
             get
             {
+                if(Parties != null)
                 return Parties.GroupBy(c => c.Product)
                     .Select(v => new ProductsInWarehouse {  Product = v.Key, CountProducts = v.Sum(s => s.CountProducts) })
                     .ToList();
+                else
+                    return new List<ProductsInWarehouse>();
             }
         }
     }

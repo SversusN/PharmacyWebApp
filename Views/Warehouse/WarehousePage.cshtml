@@ -8,6 +8,10 @@
 </head>
 <body>
     <div id="div-warehouses">
+        <form onsubmit="return false;" v-on:submit="addWarehouse">
+            <input class="input-field" type="text" v-model="newwarehouse.Name" required />
+            <input type="submit" value="Добавить" class="btn-add" />
+        </form>
         <table class="table">
             <thead>
                 <tr>
@@ -27,7 +31,7 @@
                         <a :href="'/Party/PartyPage/?id='+warehouse.id">Партии</a>
                     </td>
                     <td>
-                        <a v-onclick="removeWarehouse(warehouse.id)">Удалить</a>
+                        <a v-on:click="removeWarehouse(warehouse.id)">Удалить</a>
                     </td>
                 </tr>
             </tbody>

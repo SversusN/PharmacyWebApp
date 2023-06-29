@@ -61,11 +61,6 @@ namespace PharmacyWebApp.Models
             SaveChanges();
         }
 
-        public void AddProduct(Product product)
-        { 
-            Products.Add(product);
-            SaveChanges();
-        }
         public void AddPharmacy(Pharmacy pharmacy, out Pharmacy newpharmacy)
         {
             newpharmacy = Pharmacies.Add(pharmacy).Entity;
@@ -74,7 +69,10 @@ namespace PharmacyWebApp.Models
 
         public void AddParty(Party party, out Party newParty)
         {
-            newParty = Parties.Add(party).Entity;
+            newParty = party;
+            newParty.Warehouse = Warehouses.Find(party.Warehouse.Id);
+            newParty.Product = Products.Find(party.Product.Id);
+            Parties.Add(newParty);
             SaveChanges();
         }
 
@@ -85,8 +83,11 @@ namespace PharmacyWebApp.Models
         }
 
         public void AddWarehouse(Warehouse warehouse, out Warehouse newWarehouse)
-        { 
-            newWarehouse = Warehouses.Add(warehouse).Entity;
+        {
+
+            newWarehouse = warehouse;
+            newWarehouse.Pharmacy = Pharmacies.Find(warehouse.Pharmacy.Id);
+            Warehouses.Add(newWarehouse);
             SaveChanges();
         }
     }

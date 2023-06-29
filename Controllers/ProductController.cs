@@ -12,7 +12,14 @@ namespace PharmacyWebApp.Controllers
         }
         public IActionResult ProductPage()
         {
-            return View("ProductPage", _pharmacyDB.Products);
+            return View("ProductPage", _pharmacyDB.Products.ToList());
         }
+        public IActionResult GetProducts()
+        {
+            return Json(_pharmacyDB.Products.ToList());
+        }
+
+
+        
     }
 }

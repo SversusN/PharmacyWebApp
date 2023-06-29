@@ -23,10 +23,13 @@ namespace PharmacyWebApp.Models.Tables
         {
             get
             {
-                return Warehouses.SelectMany(c => c.ProductsInWarehouses)
-                .GroupBy(c => c.Product)
-                .Select(cc => new ProductsInPharmacy()
-                { Product = cc.Key, CountProducts = cc.Sum(ccc => ccc.CountProducts) }).ToList();
+                if (Warehouses != null)
+                    return Warehouses.SelectMany(c => c.ProductsInWarehouses)
+                    .GroupBy(c => c.Product)
+                    .Select(cc => new ProductsInPharmacy()
+                    { Product = cc.Key, CountProducts = cc.Sum(ccc => ccc.CountProducts) }).ToList();
+                else
+                    return new List<ProductsInPharmacy>();
             }
         }
     }

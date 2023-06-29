@@ -14,11 +14,12 @@ namespace PharmacyWebApp.Controllers
 
         public IActionResult PharmacyPage()
         {
-            return View("PharmacyPage", _pharmacyDB.Pharmacies);
+            return View("PharmacyPage", _pharmacyDB.Pharmacies.ToList());
         }
 
         public IActionResult RemovePharmacy(int id) 
         {
+            if(id != 0)
             _pharmacyDB.RemovePharmacy(id);
             return Ok();
         }
@@ -28,5 +29,10 @@ namespace PharmacyWebApp.Controllers
             _pharmacyDB.AddPharmacy(pharmacy, out pharmacy);
             return Json(pharmacy);
         }
+        public IActionResult ProductsForPharmacyPage(int id)
+        {
+            return View("ProductsForPharmacyPage", _pharmacyDB.Pharmacies.Find(id));
+        }
+
     }
 }

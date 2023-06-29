@@ -17,7 +17,8 @@ namespace PharmacyWebApp.Controllers
         }
         public IActionResult RemoveWarehouse(int id)
         {
-            _pharmacyDB.RemoveWarehouse(id);
+            if (id != 0)
+                _pharmacyDB.RemoveWarehouse(id);
             return Ok();
         }
 

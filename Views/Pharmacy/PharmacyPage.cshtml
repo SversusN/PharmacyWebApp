@@ -7,44 +7,69 @@
 </head>
 <body>
     <div id="div-pharmacies">
+        <form onsubmit="return false;" v-on:submit="addPharmacy">
+            <input class="input-field" type="text" v-model="newpharmacy.Name" required />
+            <input type="submit" value="Добавить" class="btn-add" />
+        </form>
         <table class="table">
             <thead>
                 <tr>
-                    <th> Номер </th>
-                    <th> Название</th>
+                    <th>Номер</th>
+                    <th>Название</th>
                     <th>Адрес</th>
                     <th>Телефон</th>
                     <th>Склады</th>
+                    <th>Товары</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var pharmacy in Model)
-                {
-                    <tr>
-                        <td> @pharmacy.Id </td>
-                        <td> @pharmacy.Name</td>
-                        <td>@pharmacy.City @pharmacy.Street</td>
-                        <td>@pharmacy.Phone</td>
-                        <td>
-                            @foreach (var warehouse in pharmacy.Warehouses)
-                            {
-                                <a href="/Warehouse/WarehousePage/?id=@pharmacy.Id">@warehouse.Name</a>
-                                <p></p>
-                            }
-                        </td>
-                        <td>
-                            <a href="/Pharmacy/ProductsFromPharmacy/?id=@pharmacy.Id">Товары</a>
-                        </td>
-
-                    </tr>
-                }
-
+                <tr v-for="pharmacy in pharmacies">
+                    <td>{{pharmacy.id}}</td>
+                    <td>{{pharmacy.name}}</td>
+                    <td>{{pharmacy.city }} {{pharmacy.street}}</td>
+                    <td>+{{pharmacy.phone}}</td>
+                    <td>
+                        <a :href="'/Warehouse/WarehousePage/?id='+pharmacy.id">Склады</a>
+                    </td>
+                    <td>
+                        <a :href="'/Pharmacy/ProductsForPharmacyPage/?id='+pharmacy.id">Товары</a>
+                    </td>
+                    <td>
+                        <a v-on:click="removePharmacy(pharmacy.id)" href="#">Удалить</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <script>
-
+            var pharmacyVue = new Vue({
+                el: '#div-pharmacies',
+                data:{
+                    newpharmacy:{
+                        Name:''
+                    },
+                    pharmacies: @Html.Raw(Json.Serialize(Model))
+                },
+                methods:
+                {
+                    addPharmacy: function()
+                    {
+                        axios.post('/Pharmacy/AddPharmacy', this.newpharmacy).
+                        then((response)=> {
+                            this.pharmacies.push(response.data);
+                        });
+                    },
+                    removePharmacy: function(id)
+                    {
+                        axios.post('/Pharmacy/RemovePharmacy', id).
+                        then((response)=> {
+                                this.pharmacies = this.pharmacies.filter(pharmacy => pharmacy.id != id);
+                        });
+                                
+                    }
+                }
+            });
         </script>
     </div>
 </body>
