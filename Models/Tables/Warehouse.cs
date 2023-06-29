@@ -1,4 +1,5 @@
 ﻿using PharmacyWebApp.Models.Tables.ProductClasses;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -7,6 +8,7 @@ namespace PharmacyWebApp.Models.Tables
     [Table("Warehouse")]
     public class Warehouse
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual Pharmacy Pharmacy { get; set; }

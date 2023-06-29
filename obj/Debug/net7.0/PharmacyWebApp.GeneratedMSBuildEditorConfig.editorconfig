@@ -16,24 +16,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\gidin\source\repos\PharmacyWebApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Home/PartyPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQYXJ0eVBhZ2UuY3NodG1s
+[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Party/PartyPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydHlcUGFydHlQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Home/PharmacyPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQaGFybWFjeVBhZ2UuY3NodG1s
+[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Pharmacy/PharmacyPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhhcm1hY3lcUGhhcm1hY3lQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Home/ProductForPharmacyPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0Rm9yUGhhcm1hY3lQYWdlLmNzaHRtbA==
+[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Pharmacy/ProductForPharmacyPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhhcm1hY3lcUHJvZHVjdEZvclBoYXJtYWN5UGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Home/ProductPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0UGFnZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Home/WarehousePage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXYXJlaG91c2VQYWdlLmNzaHRtbA==
+[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Product/ProductPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0UGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gidin/source/repos/PharmacyWebApp/Views/Shared/Error.cshtml]
@@ -42,6 +38,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/gidin/source/repos/PharmacyWebApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gidin/source/repos/PharmacyWebApp/Views/Warehouse/WarehousePage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2FyZWhvdXNlXFdhcmVob3VzZVBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gidin/source/repos/PharmacyWebApp/Views/_ViewImports.cshtml]

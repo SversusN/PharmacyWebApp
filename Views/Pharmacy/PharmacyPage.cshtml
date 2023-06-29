@@ -2,9 +2,11 @@
 @model IEnumerable<Pharmacy>
 <head>
     <link href="/css/site.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div>
+    <div id="div-pharmacies">
         <table class="table">
             <thead>
                 <tr>
@@ -28,12 +30,12 @@
                         <td>
                             @foreach (var warehouse in pharmacy.Warehouses)
                             {
-                                <a href="/Home/WarehouseForPharmacy/?id=@pharmacy.Id">@warehouse.Name</a>
+                                <a href="/Warehouse/WarehousePage/?id=@pharmacy.Id">@warehouse.Name</a>
                                 <p></p>
                             }
                         </td>
                         <td>
-                            <a href="/Home/ProductsFromPharmacy/?id=@pharmacy.Id">Товары</a>
+                            <a href="/Pharmacy/ProductsFromPharmacy/?id=@pharmacy.Id">Товары</a>
                         </td>
 
                     </tr>
@@ -41,5 +43,8 @@
 
             </tbody>
         </table>
+        <script>
+
+        </script>
     </div>
 </body>

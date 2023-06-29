@@ -32,6 +32,7 @@
             </tbody>
         </table>
         <script type="text/javascript">
+            
             var partiesVue = new Vue({
                 el: '#div-parties',
                 data:
@@ -39,30 +40,20 @@
                     newparty:
                     {
                         Product:{},
-                        Warehouse: @Model,
+                        Warehouse: JSON.parse('@Html.Raw(Json.Serialize(Model))'),
                         CountProducts:0
                     },
-                    parties:[],
-                    url:
-                    {
-                        parties:''
-                    }
+                    parties: @Html.Raw(Json.Serialize(Model.Parties))
                 },
                 mounted()
                 {
-                    this.getParties();
+
                 },
                 methods:
                 {
-                    getParties: function()
-                    {
-                        axios.get(this.url.parties).then((response)=>{
-                            this.parties = response.data;
-                        });
-                    },
                     removeParty: function(id)
                     {
-                        axios.post('/Home/RemoveParty/?id', id ).
+                        axios.post('/Home/RemoveParty', id ).
                         then((response)=> {
                             this.parties = this.parties.filter(party=> party.id != id);
                         });

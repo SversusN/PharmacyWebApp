@@ -6,52 +6,31 @@ namespace PharmacyWebApp.Models
 {
     public class PharmacyDB : DbContext
     {
-        
         public PharmacyDB(DbContextOptions<PharmacyDB> options) : base(options)
         {
             
         }
-        DbSet<Party> Parties { get; set; }
-        DbSet<Pharmacy> Pharmacies { get; set; }
-        DbSet<Product> Products { get; set; }
-        DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<Party> Parties { get; set; }
+        public DbSet<Pharmacy> Pharmacies { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
 
-        public List<Pharmacy> GetPharmacies()
-        { 
-            return Pharmacies.ToList();
-        }
-
-        public List<ProductsInPharmacy> GetProductsInPharmacies(int id)
-        {
-            return Pharmacies.ToList().Find(c => c.Id == id).ProductsInPharmacies;
-        }
-
-        public Warehouse GetWarehouse(int id)
-        {
-            return Warehouses.ToList().Find(c => c.Id == id);
-        }
-
-        public List<Product> GetProducts()
-        { 
-            return Products.ToList();
-        }
         public void RemovePharmacy(int id)
         {
-            Pharmacy pharmacy = Pharmacies.ToList().Find(x => x.Id == id);
+            Pharmacy pharmacy = Pharmacies.Find(id);
             if (pharmacy != null)
             {
                 foreach (var warehouse in pharmacy.Warehouses)
                 {
                     RemoveWarehouse(warehouse.Id);
                 }
-
                 Pharmacies.Remove(pharmacy);
             }
         }
 
         public void RemoveParty(int id)
         {
-            Party party = Parties.ToList().Find(c => c.Id == id);
+            Party party = Parties.Find(id);
             if (party != null)
             {
                 Parties.Remove(party);
@@ -61,7 +40,7 @@ namespace PharmacyWebApp.Models
 
         public void RemoveWarehouse(int id) 
         {
-            Warehouse warehouse = Warehouses.ToList().Find(c => c.Id == id);
+            Warehouse warehouse = Warehouses.Find(id);
             if(warehouse.Parties != null)
             foreach (var item in warehouse.Parties)
             {
@@ -72,7 +51,7 @@ namespace PharmacyWebApp.Models
         }
         public void RemoveProduct(int id)
         {
-            Product product = Products.ToList().Find(p=> p.Id == id);
+            Product product = Products.Find(id);
             if(product.Parties != null)
             foreach (var party in product.Parties)
             {
@@ -105,10 +84,9 @@ namespace PharmacyWebApp.Models
             SaveChanges();
         }
 
-        public void AddWarehouse(Warehouse warehouse, int pharmacyId, out Warehouse newWarehouse)
+        public void AddWarehouse(Warehouse warehouse, out Warehouse newWarehouse)
         { 
             newWarehouse = Warehouses.Add(warehouse).Entity;
-            newWarehouse.Pharmacy = Pharmacies.ToList().Find(c => c.Id == pharmacyId);
             SaveChanges();
         }
     }

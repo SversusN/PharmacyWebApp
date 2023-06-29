@@ -1,0 +1,65 @@
+﻿@using PharmacyWebApp.Models.Tables;
+@using PharmacyWebApp.Models.Tables.ProductClasses;
+@model Pharmacy;
+<head>
+    <link href="/css/site.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="div-warehouses">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Название</th>
+                    <th>Аптека</th>
+                    <th>Партии</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="warehouse in warehouses">
+                    <td>{{warehouse.id}}</td>
+                    <td>{{warehouse.name}}</td>
+                    <td>{{warehouse.pharmacy.name}}</td>
+                    <td>
+                        <a :href="'/Party/PartyPage/?id='+warehouse.id">Партии</a>
+                    </td>
+                    <td>
+                        <a v-onclick="removeWarehouse(warehouse.id)">Удалить</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var warehouseVue = new Vue({
+            el: '#div-warehouses',
+            data:{
+                newwarehouse:{
+                    Name:'',
+                    Pharmacy: JSON.parse('@Html.Raw(Json.Serialize(Model))')
+                },
+                warehouses: @Html.Raw(Json.Serialize(Model.Warehouses))
+            },
+            methods:{
+
+                addWarehouse: function()
+                {
+                    axios.post('/Warehouse/AddWarehouse', this.newwarehouse)
+                    .then((response)=> {
+                         this.warehouses.push(response.data);
+                    });
+                },
+                removeWarehouse: function(id)
+                {
+                    axios.post('/Warehouse/RemoveWarehouse',id).
+                        then((response)=> {
+                            this.warehouses = this.warehouses.filter(warehouse=> warehouse.id != id);
+                        });
+                }
+            }
+        });
+    </script>
+</body>
