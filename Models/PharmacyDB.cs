@@ -25,6 +25,7 @@ namespace PharmacyWebApp.Models
                     RemoveWarehouse(warehouse.Id);
                 }
                 Pharmacies.Remove(pharmacy);
+                SaveChanges();
             }
         }
 
@@ -41,24 +42,33 @@ namespace PharmacyWebApp.Models
         public void RemoveWarehouse(int id) 
         {
             Warehouse warehouse = Warehouses.Find(id);
-            if(warehouse.Parties != null)
-            foreach (var item in warehouse.Parties)
-            {
-                RemoveParty(item.Id);
+            if (warehouse != null)
+            {            
+                if(warehouse.Parties != null)
+                foreach (var item in warehouse.Parties)
+                {
+                    RemoveParty(item.Id);
+                }
+                Warehouses.Remove(warehouse);
+                SaveChanges();
+
             }
-            Warehouses.Remove(warehouse);
-            SaveChanges();
+
         }
         public void RemoveProduct(int id)
         {
+            
             Product product = Products.Find(id);
-            if(product.Parties != null)
-            foreach (var party in product.Parties)
+            if (product != null)
             {
-                RemoveParty(party.Id);
+                if (product.Parties != null)
+                    foreach (var party in product.Parties)
+                    {
+                        RemoveParty(party.Id);
+                    }
+                Products.Remove(product);
+                SaveChanges();
             }
-            Products.Remove(product);
-            SaveChanges();
         }
 
         public void AddPharmacy(Pharmacy pharmacy, out Pharmacy newpharmacy)

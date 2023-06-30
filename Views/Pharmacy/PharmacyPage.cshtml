@@ -41,7 +41,7 @@
                         <a :href="'/Pharmacy/ProductsForPharmacyPage/?id='+pharmacy.id">Товары</a>
                     </td>
                     <td>
-                        <a v-on:click="removePharmacy(pharmacy.id)" href="#">Удалить</a>
+                        <a v-on:click="removePharmacy(pharmacy)" href="#">Удалить</a>
                     </td>
                 </tr>
             </tbody>
@@ -68,10 +68,12 @@
                             this.pharmacies.push(response.data);
                         });
                 },
-                removePharmacy: function (id) {
-                    axios.post('/Pharmacy/RemovePharmacy', id).
+                removePharmacy: function (pharmacy) {
+                    
+                    axios.post('/Pharmacy/RemovePharmacy/?id=' + pharmacy.id).
                         then((response) => {
-                            this.pharmacies = this.pharmacies.filter(pharmacy => pharmacy.id != id);
+
+                            this.pharmacies = this.pharmacies.filter(pharmacyitem => pharmacyitem.id != pharmacy.id);
                         });
 
                 }

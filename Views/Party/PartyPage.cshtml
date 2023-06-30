@@ -9,16 +9,16 @@
 <body>
     <div id="div-parties">
         <form onsubmit="return false;" v-on:submit="addParty">
+            <a class="link-back" href="/Warehouse/WarehousePage/?id=@Model.Pharmacy.Id">Назад</a>
             <input class="input-field" type="text" v-model="newparty.CountProducts" required />
             <div class="select-box">
                 <select v-model="newparty.Product">
                     <option v-for="product in products" :value="product" :key="product.id">{{product.name}}</option>
                 </select>
             </div>
-            
             <input type="submit" value="Добавить" class="btn-add" />
         </form>
-
+        
 
         <table class="table">
             <thead>
@@ -35,7 +35,8 @@
                     <td>{{party.id}}</td>
                     <td>{{party.product.name}}</td>
                     <td>{{party.countProducts}}</td>
-                    <td>{{party.warehouse.name}}</td>
+                    <td>
+                        {{party.warehouse.name}}</td>
                     <td>
                         <a v-on:click="removeParty(party.id)" href="#">Удалить</a>
                     </td>
@@ -78,7 +79,7 @@
                 },
                 removeParty: function(id)
                 {
-                    axios.post('/Party/RemoveParty', id ).
+                    axios.post('/Party/RemoveParty/?id='+ id ).
                     then((response)=> {
                         this.parties = this.parties.filter(party=> party.id != id);
                     });

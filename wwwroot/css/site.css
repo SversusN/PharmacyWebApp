@@ -70,6 +70,18 @@
     }
 
     /* Стиль для опций Combobox */
-    .select-box select option {
-        padding: 8px 16px;
-    }
+.select-box select option {
+    padding: 8px 16px;
+}
+.link-back {
+    color: #000000;
+    text-decoration: none;
+    
+    margin-right:30px;
+    font-size:20px;
+}
+
+/*    .link-back:hover {
+        color: #ffffff;
+        background-color: #000000;
+    }*/

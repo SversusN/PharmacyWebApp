@@ -19,7 +19,6 @@ namespace PharmacyWebApp.Controllers
 
         public IActionResult RemovePharmacy(int id) 
         {
-            if(id != 0)
             _pharmacyDB.RemovePharmacy(id);
             return Ok();
         }
